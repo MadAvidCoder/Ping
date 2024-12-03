@@ -1,0 +1,213 @@
+[gd_scene load_steps=13 format=3 uid="uid://bdjv16822kaur"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_1c8ih"]
+[ext_resource type="Texture2D" uid="uid://c1b7w37rjwrk1" path="res://centre.png" id="1_7whlr"]
+[ext_resource type="Texture2D" uid="uid://dacxfyjrewl2b" path="res://ball.png" id="1_q53yj"]
+[ext_resource type="Texture2D" uid="uid://cpd6r1i4176e6" path="res://paddle.png" id="2_0g6h1"]
+[ext_resource type="Script" path="res://ball.gd" id="3_m1hx2"]
+[ext_resource type="FontFile" uid="uid://bcbljsoqwk1o4" path="res://font.ttf" id="4_rvmn3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h7wga"]
+radius = 570.574
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6x30"]
+size = Vector2(20, 1100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnfl5"]
+size = Vector2(1150, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eb1f4"]
+size = Vector2(1150, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nb76m"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqoox"]
+size = Vector2(20, 648)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_1c8ih")
+
+[node name="Start" type="Control" parent="."]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="ColorRect" type="ColorRect" parent="Start"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Start"]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 25.0
+offset_right = 693.0
+offset_bottom = 106.0
+theme_override_fonts/font = ExtResource("4_rvmn3")
+theme_override_font_sizes/font_size = 80
+text = "Ping"
+
+[node name="Single" type="Button" parent="Start"]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 491.0
+offset_right = 434.0
+offset_bottom = 529.0
+theme_override_fonts/font = ExtResource("4_rvmn3")
+theme_override_font_sizes/font_size = 30
+text = "Single Player"
+
+[node name="Two" type="Button" parent="Start"]
+layout_mode = 0
+offset_left = 751.0
+offset_top = 491.0
+offset_right = 977.0
+offset_bottom = 529.0
+theme_override_fonts/font = ExtResource("4_rvmn3")
+theme_override_font_sizes/font_size = 30
+text = "Two Player"
+
+[node name="Ball" type="Sprite2D" parent="Start"]
+position = Vector2(576, 291)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_q53yj")
+
+[node name="End" type="Control" parent="."]
+visible = false
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="ColorRect" type="ColorRect" parent="End"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="End"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 25.0
+offset_right = 1022.0
+offset_bottom = 106.0
+theme_override_fonts/font = ExtResource("4_rvmn3")
+theme_override_font_sizes/font_size = 80
+text = "Player X Wins!"
+horizontal_alignment = 1
+
+[node name="Again" type="Button" parent="End"]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 531.0
+offset_right = 689.0
+offset_bottom = 569.0
+theme_override_fonts/font = ExtResource("4_rvmn3")
+theme_override_font_sizes/font_size = 30
+text = "Play Again"
+
+[node name="Ball" type="Sprite2D" parent="End"]
+position = Vector2(576, 324)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_q53yj")
+
+[node name="Centre" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+rotation = 1.5708
+scale = Vector2(0.77, 0.77)
+texture = ExtResource("1_7whlr")
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(0.03, 0.03)
+collision_mask = 3
+script = ExtResource("3_m1hx2")
+
+[node name="Sprite" type="Sprite2D" parent="Ball"]
+texture = ExtResource("1_q53yj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("CircleShape2D_h7wga")
+
+[node name="PaddleLeft" type="StaticBody2D" parent="."]
+position = Vector2(60, 325)
+scale = Vector2(0.1, 0.12)
+
+[node name="Sprite" type="Sprite2D" parent="PaddleLeft"]
+texture = ExtResource("2_0g6h1")
+flip_h = true
+
+[node name="Collision" type="CollisionShape2D" parent="PaddleLeft"]
+position = Vector2(100, 8.33398)
+shape = SubResource("RectangleShape2D_f6x30")
+
+[node name="PaddleRight" type="StaticBody2D" parent="."]
+position = Vector2(1092, 324)
+scale = Vector2(0.1, 0.12)
+
+[node name="Sprite" type="Sprite2D" parent="PaddleRight"]
+texture = ExtResource("2_0g6h1")
+
+[node name="Collision" type="CollisionShape2D" parent="PaddleRight"]
+position = Vector2(-100, 0)
+shape = SubResource("RectangleShape2D_f6x30")
+
+[node name="Borders" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="Top" type="CollisionShape2D" parent="Borders"]
+position = Vector2(576, -7.5)
+shape = SubResource("RectangleShape2D_qnfl5")
+
+[node name="Bottom" type="CollisionShape2D" parent="Borders"]
+position = Vector2(576, 655.5)
+shape = SubResource("RectangleShape2D_eb1f4")
+
+[node name="ZoneLeft" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneLeft"]
+position = Vector2(-9, 324)
+shape = SubResource("RectangleShape2D_nb76m")
+
+[node name="ZoneRight" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneRight"]
+position = Vector2(1161, 324)
+shape = SubResource("RectangleShape2D_tqoox")
+
+[node name="ScoreLeft" type="Label" parent="."]
+offset_left = 188.0
+offset_top = 10.0
+offset_right = 388.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_rvmn3")
+theme_override_font_sizes/font_size = 85
+text = "0"
+horizontal_alignment = 1
+
+[node name="ScoreRight" type="Label" parent="."]
+offset_left = 764.0
+offset_top = 5.0
+offset_right = 964.0
+offset_bottom = 91.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_rvmn3")
+theme_override_font_sizes/font_size = 85
+text = "0"
+horizontal_alignment = 1
+
+[node name="BallTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="pressed" from="Start/Single" to="." method="_on_single_pressed"]
+[connection signal="pressed" from="Start/Two" to="." method="_on_two_pressed"]
+[connection signal="pressed" from="End/Again" to="." method="_on_again_pressed"]
+[connection signal="body_entered" from="ZoneLeft" to="." method="_on_zone_left_body_entered"]
+[connection signal="body_entered" from="ZoneRight" to="." method="_on_zone_right_body_entered"]
+[connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
